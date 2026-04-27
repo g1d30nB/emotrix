@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotrix — Emotion Intelligence Middleware</title>
+    <meta name="description" content="The intelligence layer for emotion AI. Engine-agnostic. Domain-configurable. Production-ready.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #FAFAF7;
+            --bg-warm: #F3F1EC;
+            --bg-accent: #ECEAE4;
+            --text: #1A1A1A;
+            --text-secondary: #6B6B6B;
+            --text-tertiary: #999;
+            --accent: #2A5F5A;
+            --accent-light: rgba(42, 95, 90, 0.08);
+            --border: rgba(0, 0, 0, 0.06);
+            --white: #FFFFFF;
+        }
+
+        html { font-size: 16px; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .serif { font-family: 'Instrument Serif', Georgia, serif; }
+
+        /* ── Layout ── */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .container-narrow {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4.5rem 0;
+        }
+
+        /* ── Nav ── */
+        nav {
+            padding: 1.75rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .wordmark {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text);
+        }
+
+        .wordmark-sub {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            color: var(--text-tertiary);
+            margin-top: 0.15rem;
+        }
+
+        .nav-tag {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            padding: 5rem 0 4rem;
+        }
+
+        .hero h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: clamp(2.5rem, 5vw, 3.75rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .hero h1 em {
+            font-style: italic;
+        }
+
+        .hero-sub {
+            font-size: 1.15rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            max-width: 620px;
+            line-height: 1.75;
+        }
+
+        /* ── The gap ── */
+        .the-gap {
+            background: var(--bg-warm);
+        }
+
+        .the-gap .label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin-bottom: 2rem;
+        }
+
+        .the-gap h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            font-weight: 400;
+            line-height: 1.25;
+            margin-bottom: 1.5rem;
+        }
+
+        .the-gap p {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            max-width: 580px;
+            line-height: 1.8;
+        }
+
+        .the-gap p strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* ── What we build ── */
+        .what-we-build .label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin-bottom: 2rem;
+        }
+
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .pillar {
+            padding: 2.25rem;
+            background: var(--white);
+            border-radius: 4px;
+        }
+
+        .pillar h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 1.35rem;
+            font-weight: 400;
+            margin-bottom: 0.75rem;
+        }
+
+        .pillar p {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ── Multimodal ── */
+        .multimodal {
+            background: var(--bg-warm);
+        }
+
+        .multimodal .label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin-bottom: 2rem;
+        }
+
+        .modalities {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .modality {
+            flex: 1;
+        }
+
+        .modality h4 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .modality p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            font-weight: 300;
+        }
+
+        .modality-plus {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 2rem;
+            color: var(--text-tertiary);
+            padding-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        /* ── Domains ── */
+        .domains .label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin-bottom: 1.5rem;
+        }
+
+        .domains h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            font-weight: 400;
+            line-height: 1.25;
+            margin-bottom: 0.75rem;
+        }
+
+        .domains .section-sub {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            max-width: 480px;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+
+        .domains-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+        }
+
+        .domain-card {
+            background: var(--bg);
+            padding: 2rem;
+        }
+
+        .domain-card .tag {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+
+        .domain-card h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 1.35rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .domain-card p {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            font-weight: 300;
+        }
+
+        /* ── CTA ── */
+        .cta-section {
+            background: var(--bg-warm);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 0.6rem;
+        }
+
+        .cta-section .sub {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 0.6rem;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .email-form input[type="email"] {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .email-form input[type="email"]::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .email-form input[type="email"]:focus {
+            border-color: var(--accent);
+        }
+
+        .email-form button {
+            padding: 0.8rem 1.5rem;
+            background: var(--text);
+            color: var(--bg);
+            border: none;
+            border-radius: 3px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: opacity 0.2s ease;
+        }
+
+        .email-form button:hover {
+            opacity: 0.85;
+        }
+
+        .cta-note {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            margin-top: 1rem;
+        }
+
+        .form-success {
+            display: none;
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 400;
+            padding: 1rem 0;
+        }
+
+        .form-success.visible {
+            display: block;
+        }
+
+        /* ── Footer ── */
+        footer {
+            padding: 2.5rem 0;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        footer .wordmark {
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+        }
+
+        footer .copy {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .hero { padding: 5rem 0 4rem; }
+            section { padding: 4rem 0; }
+            .pillars { grid-template-columns: 1fr; }
+            .domains-grid { grid-template-columns: repeat(2, 1fr); }
+            .modalities { flex-direction: column; gap: 2rem; }
+            .modality-plus { display: none; }
+            .email-form { flex-direction: column; }
+            .email-form button { width: 100%; }
+            nav { flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+            footer { flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+        }
+
+        @media (max-width: 480px) {
+            .domains-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div>
+                <div class="wordmark">Emotrix</div>
+                <div class="wordmark-sub">The Emotional Matrix</div>
+            </div>
+            <div class="nav-tag">Coming 2026</div>
+        </nav>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>The layer between <em>signal</em> and&nbsp;<em>meaning</em></h1>
+            <p class="hero-sub">Emotion detection tells you someone's face moved. Emotrix tells you what it means, why it matters, and what to do about it.</p>
+        </div>
+    </section>
+
+    <!-- The gap -->
+    <section class="the-gap">
+        <div class="container">
+            <div class="label">The problem</div>
+            <h2>Emotion AI is either locked&nbsp;down or left to&nbsp;you</h2>
+            <p>The market has consolidated into closed ecosystems that lock you to a single vendor, or raw APIs that hand you detection scores and expect you to build the intelligence yourself. There is no open, production-ready layer that turns emotion signals into something your team can actually use. <strong>That's what we're building.</strong></p>
+        </div>
+    </section>
+
+    <!-- What we build -->
+    <section class="what-we-build">
+        <div class="container">
+            <div class="label">What Emotrix does</div>
+            <div class="pillars">
+                <div class="pillar">
+                    <h3>Engine-agnostic</h3>
+                    <p>Swap signal providers without touching your integration. Your intelligence layer isn't locked to any single vendor's roadmap, pricing, or limitations. Start with one engine, add others, switch entirely. Your data and insights stay.</p>
+                </div>
+                <div class="pillar">
+                    <h3>Contextual intelligence</h3>
+                    <p>The same micro-expression means different things in different contexts. A flash of surprise during a usability test is not the same as surprise in a vehicle cockpit. Emotrix interprets through domain-specific lenses, so you get meaning, not numbers.</p>
+                </div>
+                <div class="pillar">
+                    <h3>Production-ready</h3>
+                    <p>Session management, multi-participant analysis, emotional journey visualisation, comparative analytics, and compliance tooling. The operational infrastructure that turns a research API into enterprise software.</p>
+                </div>
+                <div class="pillar">
+                    <h3>Domain-configurable</h3>
+                    <p>One platform, many applications. Configure the intelligence layer for your industry and use case without rebuilding the stack. The interpretation changes; the infrastructure doesn't.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Multimodal -->
+    <section class="multimodal">
+        <div class="container">
+            <div class="label">Multimodal by design</div>
+            <div class="modalities">
+                <div class="modality">
+                    <h4>Voice</h4>
+                    <p>Prosody, pitch, rhythm, and micro-hesitations. What the voice reveals that words alone never will.</p>
+                </div>
+                <div class="modality-plus">+</div>
+                <div class="modality">
+                    <h4>Face</h4>
+                    <p>Micro-expressions, action units, and emotional trajectories across 48+ dimensions of facial affect.</p>
+                </div>
+                <div class="modality-plus">=</div>
+                <div class="modality">
+                    <h4>Meaning</h4>
+                    <p>Cross-modal fusion and confidence scoring. When face and voice agree, certainty is high. When they diverge, something important is happening.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Domains -->
+    <section class="domains">
+        <div class="container">
+            <div class="label">Where it applies</div>
+            <h2>One platform. Many&nbsp;domains.</h2>
+            <p class="section-sub">Anywhere a face is visible or a voice is audible, emotion intelligence creates value.</p>
+            <div class="domains-grid">
+                <div class="domain-card">
+                    <span class="tag">Automotive</span>
+                    <h3>Cabin intelligence</h3>
+                    <p>Emotion-aware interiors that adapt in real time. Fatigue, stress, comfort, and engagement interpreted beyond simple alertness.</p>
+                </div>
+                <div class="domain-card">
+                    <span class="tag">Product development</span>
+                    <h3>UX and design research</h3>
+                    <p>See what users feel, not just what they report. Emotional response timelines overlaid on every interaction, every prototype, every test.</p>
+                </div>
+                <div class="domain-card">
+                    <span class="tag">Customer experience</span>
+                    <h3>Service and support</h3>
+                    <p>Real-time emotional trajectory of every interaction. Predict escalation. Coach in the moment. Score on feeling, not just resolution.</p>
+                </div>
+                <div class="domain-card">
+                    <span class="tag">Marketing</span>
+                    <h3>Genuine response</h3>
+                    <p>Measure real emotional reaction to creative, second by second. Know which moment lands before you commit the spend.</p>
+                </div>
+                <div class="domain-card">
+                    <span class="tag">Healthcare</span>
+                    <h3>Patient insight</h3>
+                    <p>Objective emotional indicators during consultations and therapy. Support clinical judgement with data that patients can't always articulate.</p>
+                </div>
+                <div class="domain-card">
+                    <span class="tag">Research</span>
+                    <h3>Deep response analytics</h3>
+                    <p>The gap between what people say and what their face and voice reveal. Genuine reactions to products, concepts, and experiences.</p>
+                </div>
+                <div class="domain-card">
+                    <span class="tag">Entertainment</span>
+                    <h3>Audience intelligence</h3>
+                    <p>Quantified emotional arcs for film, gaming, and live experience. Granular, real-time response data that replaces guesswork.</p>
+                </div>
+                <div class="domain-card">
+                    <span class="tag">Education</span>
+                    <h3>Learning engagement</h3>
+                    <p>Detect confusion, disengagement, and cognitive overload as it happens. Adapt to how the learner feels, not how they say they feel.</p>
+                </div>
+                <div class="domain-card">
+                    <span class="tag">Retail</span>
+                    <h3>Physical touchpoints</h3>
+                    <p>Emotional intelligence at the counter, the showroom, the service desk. Measure what customers feel without asking them to fill in a form.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container-narrow">
+            <h2>Get early access</h2>
+            <p class="sub">We're onboarding design partners now.</p>
+            <form class="email-form" id="signup-form">
+                <input type="email" placeholder="you@company.com" required autocomplete="email" />
+                <button type="submit">Register interest</button>
+            </form>
+            <div class="form-success" id="form-success">Thank you. We'll be in touch.</div>
+            <p class="cta-note">No spam. We'll reach out when there's something to show.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="container">
+        <footer>
+            <div class="wordmark">Emotrix</div>
+            <div class="copy">&copy; 2026 Emotrix. All rights reserved.</div>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            const subject = encodeURIComponent('Emotrix — Early Access Interest');
+            const body = encodeURIComponent('Hi,\n\nI\'d like to register my interest in early access to Emotrix.\n\nMy email: ' + email + '\n');
+            window.location.href = 'mailto:gideonb@me.com?subject=' + subject + '&body=' + body;
+            this.style.display = 'none';
+            document.getElementById('form-success').classList.add('visible');
+        });
+    </script>
+</body>
+</html>
